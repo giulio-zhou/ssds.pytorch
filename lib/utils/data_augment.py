@@ -204,10 +204,10 @@ class preproc(object):
 
     def __call__(self, image, targets=None):
         # some bugs 
-        if self.p == -2: # abs_test
+        if self.p == -2 or len(targets) == 0: # abs_test
             targets = np.zeros((1,5))
-            targets[0] = image.shape[0]
-            targets[0] = image.shape[1]
+            # targets[0] = image.shape[0]
+            # targets[0] = image.shape[1]
             image = preproc_for_test(image, self.resize, self.means)
             return torch.from_numpy(image), targets
 

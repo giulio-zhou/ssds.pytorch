@@ -1,9 +1,11 @@
 from lib.dataset import voc
 from lib.dataset import coco
+from lib.dataset import distill
 
 dataset_map = {
                 'voc': voc.VOCDetection,
                 'coco': coco.COCODetection,
+                'distill': distill.DistillDetection,
             }
 
 def gen_dataset_fn(name):

@@ -16,7 +16,7 @@ class FSSDLite(nn.Module):
         base: base layers for input
         extras: extra layers that feed to multibox loc and conf layers
         head: "multibox head" consists of loc and conf conv layers
-        features： include to feature layers to fusion feature and build pyramids
+        features: include to feature layers to fusion feature and build pyramids
         feature_layer: the feature layers for head to loc and conf
         num_classes: num of classes 
     """
