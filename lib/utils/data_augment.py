@@ -181,7 +181,8 @@ def _elastic(image, p, alpha=None, sigma=None, random_state=None):
 def preproc_for_test(image, insize, mean):
     interp_methods = [cv2.INTER_LINEAR, cv2.INTER_CUBIC, cv2.INTER_AREA, cv2.INTER_NEAREST, cv2.INTER_LANCZOS4]
     interp_method = interp_methods[random.randrange(5)]
-    image = cv2.resize(image, (insize[0], insize[1]),interpolation=interp_method)
+    # TODO: Is inverting dims correct?
+    image = cv2.resize(image, (insize[1], insize[0]),interpolation=interp_method)
     image = image.astype(np.float32)
     image -= mean
     return image.transpose(2, 0, 1)

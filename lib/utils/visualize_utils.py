@@ -115,7 +115,8 @@ def viz_prior_box(writer, prior_box, image=None, epoch=0):
         image = np.random.random((prior_box.image_size[0], prior_box.image_size[1], 3))
     elif isinstance(image, str):
         image = cv2.imread(image, -1)
-    image = cv2.resize(image, (prior_box.image_size[0], prior_box.image_size[1]))
+    # image = cv2.resize(image, (prior_box.image_size[0], prior_box.image_size[1]))
+    image = cv2.resize(image, (prior_box.image_size[1], prior_box.image_size[0]))
     
     for k, f in enumerate(prior_box.feature_maps):
         bbxs = []
