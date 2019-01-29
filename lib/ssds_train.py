@@ -25,6 +25,11 @@ from lib.utils.config_parse import cfg
 from lib.utils.eval_utils import *
 from lib.utils.visualize_utils import *
 
+class TransposeSummaryWriter(SummaryWriter):
+    def add_image(self, name, image_show, epoch):
+        super(TransposeSummaryWriter, self).add_image(
+            name, np.transpose(image_show, (2, 0, 1)), epoch)
+
 class Solver(object):
     """
     A wrapper class for the training process
@@ -74,7 +79,8 @@ class Solver(object):
         self.criterion = MultiBoxLoss(cfg.MATCHER, self.priors, self.use_gpu)
 
         # Set the logger
-        self.writer = SummaryWriter(log_dir=cfg.LOG_DIR)
+        # self.writer = SummaryWriter(log_dir=cfg.LOG_DIR)
+        self.writer = TransposeSummaryWriter(log_dir=cfg.LOG_DIR)
         self.output_dir = cfg.EXP_DIR
         self.checkpoint = cfg.RESUME_CHECKPOINT
         self.checkpoint_prefix = cfg.CHECKPOINTS_PREFIX
