@@ -533,6 +533,7 @@ class Solver(object):
         # get img
         image = data_loader.dataset.pull_image(img_index)
         anno = data_loader.dataset.pull_anno(img_index)
+        anno = np.array([x[1] for x in anno[1]])
 
         # visualize archor box
         viz_prior_box(writer, priorbox, image, epoch)
