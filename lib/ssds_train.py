@@ -58,9 +58,13 @@ class Solver(object):
             self.model.cuda()
             self.priors.cuda()
             cudnn.benchmark = True
-            # if torch.cuda.device_count() > 1:
+            if torch.cuda.device_count() > 1:
+                device_ids = list(range(torch.cuda.device_count()))
                 # self.model = torch.nn.DataParallel(self.model).module
-
+                orig_model = self.model
+                self.model = torch.nn.DataParallel(self.model, device_ids=device_ids)
+                for module in cfg.TRAIN.TRAINABLE_SCOPE.split(','):
+                    setattr(self.model, module, getattr(orig_model, module))
         # Print the model architecture and parameters
         print('Model architectures:\n{}\n'.format(self.model))
 
